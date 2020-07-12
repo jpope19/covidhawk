@@ -1,28 +1,25 @@
 {
-  "name": "imsickwithcovid",
+  "name": "imsickwithcovid-fe",
   "version": "1.0.0",
-  "description": "form to track covid",
-  "main": "index.js",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "cowsay": "^1.4.0",
-    "express": "^4.17.1"
-  },
-  "devDependencies": {},
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "export": "nuxt export",
+    "serve": "nuxt serve",
+    "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jpope19/imsickwithcovid.git"
+  "dependencies": {
+    "express": "^4.17.1",
+    "nuxt": "^2.13.0"
   },
-  "keywords": [
-    "covid"
-  ],
-  "author": "Jeffrey Pope",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jpope19/imsickwithcovid/issues"
-  },
-  "homepage": "https://github.com/jpope19/imsickwithcovid#readme"
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.2",
+    "@vue/test-utils": "^1.0.3",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^26.0.1",
+    "jest": "^26.0.1",
+    "vue-jest": "^3.0.4"
+  }
 }
