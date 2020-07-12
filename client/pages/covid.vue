@@ -36,9 +36,11 @@
           ></v-text-field>
         </v-col>
       </v-row>
+      <v-divider></v-divider>
       <v-row>
         <v-col cols="12">
           <header>COVID Symptoms</header>
+          <v-subheader>Select all that apply</v-subheader>
         </v-col>
         <v-col cols="12" md="4">
           <v-switch v-model="symptoms.fever" class="mx-2" label="Fever or chills"></v-switch>
@@ -89,6 +91,7 @@
           <v-switch v-model="symptoms.blue" class="mx-2" label="Bluish lips or face"></v-switch>
         </v-col>
       </v-row>
+      <v-divider></v-divider>
       <v-row>
         <v-col cols="12">
           <header>COVID Contraction</header>
@@ -146,7 +149,44 @@
         hypersomnia: false,
         // Bluish lips or face
         blue: false,
-      }
+      },
+      contraction: {
+        // Estimated days since contraction
+        // How often did you wear a mask in public
+        // What kind of housing do you have
+        // How cautious were you
+        // What news outlet do you get most of your news from
+      },
+      location: {
+        coords: {
+          accuracy: 0,
+          altitude: null,
+          altitudeAccuracy: null,
+          heading: null,
+          // i guess we can get zip code from long/lat?
+          latitude: 0,
+          longitude: 0,
+          speed: 0,
+        },
+        timestamp: 0,
+      },
+      validlocation: false,
     }),
+    mounted () {
+      const self = this;
+      navigator.geolocation.getCurrentPosition(pos => {
+          console.log(pos);
+          self.location = pos;
+          self.validlocation = true;
+        }, err => {
+          console.log('Error occurred. Error code: ' + error.code);
+          // error.code can be:
+          //   0: unknown error
+          //   1: permission denied
+          //   2: position unavailable (error response from location provider)
+          //   3: timed out
+        }
+      );
+    }
   }
 </script>
