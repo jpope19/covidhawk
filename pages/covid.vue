@@ -152,10 +152,25 @@
       },
       contraction: {
         // Estimated days since contraction
+        days: '',
         // How often did you wear a mask in public
+        mask: '',
         // What kind of housing do you have
+        housing: '',
         // How cautious were you
+        cautiousness: '',
         // What news outlet do you get most of your news from
+        news: '',
+        newstoo: '',
+        newsthree: '',
+        // When was the last time you traveled
+        travel: '',
+        // Have you received a positive COVID-19 test
+        test: false,
+        // Have you recieved a positive COVID-19 antibody test
+        antibody: false,
+        // How often do you exercise outdoors
+        exercise: '',
       },
       location: {
         coords: {

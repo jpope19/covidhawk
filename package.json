@@ -1,19 +1,20 @@
 {
-  "name": "imsickwithcovid-fe",
+  "name": "imsickwithcovid",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "node index",
     "export": "nuxt export",
     "serve": "nuxt serve",
     "test": "jest"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^7.8.0",
     "@nuxtjs/vuetify": "^1.11.2",
-    "elasticsearch": "^16.7.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "js-yaml": "^3.14.0",
     "nuxt": "^2.13.0"
   },
   "devDependencies": {

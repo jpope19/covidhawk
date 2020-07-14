@@ -1,0 +1,65 @@
+_doc:
+  dynamic: strict
+  properties:
+    symptoms:
+      properties:
+        fever:
+          type: boolean
+        cough:
+          type: boolean
+        breathing:
+          type: boolean
+        fatigue:
+          type: boolean
+        aches:
+          type: boolean
+        headache:
+          type: boolean
+        senses:
+          type: boolean
+        throat:
+          type: boolean
+        congestion:
+          type: boolean
+        nausea:
+          type: boolean
+        diarrhea:
+          type: boolean
+        breathingx:
+          type: boolean
+        chest:
+          type: boolean
+        confusion:
+          type: boolean
+        hypersomnia:
+          type: boolean
+        blue:
+          type: boolean
+    contraction:
+      properties:
+        days:
+          type: keyword
+        mask:
+          type: keyword
+        housing:
+          type: keyword
+        cautiousness:
+          type: keyword
+        news:
+          type: keyword
+        newstoo:
+          type: keyword
+        newsthree:
+          type: keyword
+        travel:
+          type: keyword
+        test:
+          type: boolean
+        antibody:
+          type: boolean
+        exercise:
+          type: keyword
+    location:
+      type: geo_point
+
+  
