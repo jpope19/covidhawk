@@ -1,1 +1,1 @@
-web: node index
+web: npm run build && node index
