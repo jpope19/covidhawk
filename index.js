@@ -1,15 +1,24 @@
 const elastic = require('./elasticsearch'),
-  { loadNuxt, build } = require('nuxt');
+  { loadNuxt, build } = require('nuxt'),
+  app = require('express')(),
+  // Check if we need to run Nuxt in development mode
+  isDev = process.env.NODE_ENV !== 'production',
+  port = process.env.PORT || 3000;
 
 elastic.init().then(() => {
-  // Check if we need to run Nuxt in development mode
-  const isDev = process.env.NODE_ENV !== 'production';
-
   // Get a ready to use Nuxt instance
   return loadNuxt(isDev ? 'dev' : 'start').then(nuxt => {
+
     // Enable live build & reloading on dev
     if (isDev) {
-      build(nuxt);
+      return build(nuxt).then(() => nuxt);
     }
+
+    return Promise.resolve(nuxt);
   });
+}).then(nuxt => {
+  app.use(nuxt.render);
+  app.listen(3000, '0.0.0.0');
+
+  console.log('Server listening on `localhost:' + port + '`.');
 }).catch(error => console.error('There was an error while starting elastic', error));

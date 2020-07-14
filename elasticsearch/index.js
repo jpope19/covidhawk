@@ -53,7 +53,7 @@ async function init() {
 
   const indices = ELASTIC_MAPPINGS.map(mapping => ({
       alias: mapping.replace(/\.ya?ml/, ''),
-      body: fs.readFileSync(`${MAPPINGS_PATH}/${mapping}`, 'utf8'),
+      body: fs.readFileSync(path.join(MAPPINGS_PATH, mapping), 'utf8'),
     })),
     indicesPromises = indices.map(async ({ alias, body }) => {
       const index = `${alias}_v1`,
