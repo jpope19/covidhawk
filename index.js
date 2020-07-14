@@ -18,7 +18,7 @@ elastic.init().then(() => {
   });
 }).then(nuxt => {
   app.use(nuxt.render);
-  app.listen(3000, '0.0.0.0');
+  app.listen(port, '0.0.0.0');
 
   console.log('Server listening on `localhost:' + port + '`.');
 }).catch(error => console.error('There was an error while starting elastic', error));
