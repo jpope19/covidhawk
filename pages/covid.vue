@@ -188,13 +188,18 @@
       validlocation: false,
     }),
     mounted () {
+      if (!navigator || !navigator.geolocation) {
+        // redirect to how to page that tells user to use current browser and allow location
+      }
+
       const self = this;
+
       navigator.geolocation.getCurrentPosition(pos => {
           console.log(pos);
           self.location = pos;
           self.validlocation = true;
         }, err => {
-          console.log('Error occurred. Error code: ' + error.code);
+          console.log('Error occurred. Error code: ' + err.code);
           // error.code can be:
           //   0: unknown error
           //   1: permission denied
