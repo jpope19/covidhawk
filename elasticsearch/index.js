@@ -12,6 +12,7 @@ const fs = require('fs'),
     maxRetries: 5,
     requestTimeout: 60000,
   }),
+  COVID_INDEX = 'illness',
   MAPPINGS_PATH = path.join(__dirname, 'mappings'),
   ELASTIC_MAPPINGS = fs.readdirSync(MAPPINGS_PATH) || [];
 
@@ -37,6 +38,24 @@ function getIndexSettings() {
       number_of_replicas: 2,
     },
   };
+}
+
+/**
+ * Post a covid case to elastic
+ *
+ * @param {Object} covid
+ */
+async function postCovid(body) {
+  return client
+    .create({
+      COVID_INDEX,
+      id,
+      body,
+    })
+    .then(resp => {
+      console.log(JSON.stringify(resp));
+      return body;
+    });
 }
 
 /**
@@ -83,3 +102,4 @@ async function init() {
 }
 
 module.exports.init = init;
+module.exports.postCovid = postCovid;

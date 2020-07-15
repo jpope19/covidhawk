@@ -1,6 +1,7 @@
 const elastic = require('./elasticsearch'),
   { loadNuxt, build } = require('nuxt'),
   app = require('express')(),
+  bodyParser = require('body-parser'),
   // Check if we need to run Nuxt in development mode
   isDev = process.env.NODE_ENV !== 'production',
   port = process.env.PORT || 3000;
@@ -17,8 +18,9 @@ elastic.init().then(() => {
     return Promise.resolve(nuxt);
   });
 }).then(nuxt => {
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
   app.use(nuxt.render);
   app.listen(port, '0.0.0.0');
-
   console.log('Server listening on `localhost:' + port + '`.');
 }).catch(error => console.error('There was an error while starting elastic', error));

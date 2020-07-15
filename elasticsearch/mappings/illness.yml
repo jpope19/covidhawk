@@ -1,39 +1,53 @@
 _doc:
   dynamic: strict
   properties:
+    testing:
+      properties:
+        antibody:
+          properties:
+            tested:
+              type: boolean
+            date:
+              type: date
+            result:
+              type: keyword
+        viral:
+          properties:
+            tested:
+              type: boolean
+            date:
+              type: date
+            result:
+              type: keyword
+        recovery:
+          type: keyword
+        doctors:
+          properties:
+            urgent:
+              type: boolean
+            er:
+              type: boolean
+            hospitalized:
+              type: boolean
     symptoms:
       properties:
         fever:
           type: boolean
-        cough:
+        congestion:
+          type: boolean
+        senses:
           type: boolean
         breathing:
+          type: boolean
+        cough:
           type: boolean
         fatigue:
           type: boolean
         aches:
           type: boolean
-        headache:
-          type: boolean
-        senses:
-          type: boolean
-        throat:
-          type: boolean
-        congestion:
-          type: boolean
-        nausea:
-          type: boolean
         diarrhea:
           type: boolean
-        breathingx:
-          type: boolean
-        chest:
-          type: boolean
-        confusion:
-          type: boolean
-        hypersomnia:
-          type: boolean
-        blue:
+        appetite:
           type: boolean
     contraction:
       properties:

@@ -1,0 +1,62 @@
+<template>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12">
+        <header>COVID Symptoms</header>
+        <v-subheader>Select all that apply</v-subheader>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="fever" class="mx-2" label="Fever above 100F"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="congestion" class="mx-2" label="Congestion or runny nose"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="senses" class="mx-2" label="Loss of taste or smell"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="breathing" class="mx-2" label="Shortness of breath or difficulty breathing"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="cough" class="mx-2" label="Cough"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="fatigue" class="mx-2" label="Unusual fatigue"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="aches" class="mx-2" label="Chills or body aches"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="diarrhea" class="mx-2" label="Vomiting or diarrhea"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-switch v-model="appetite" class="mx-2" label="Loss of appetite"></v-switch>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      // Fever above 100F?
+      fever: false,
+      // Congestion or runny nose
+      congestion: false,
+      // Loss of taste or smell
+      senses: false,
+      // Shortness of breath or difficulty breathing
+      breathing: false,
+      // Cough
+      cough: false,
+      // Unusual fatigue
+      fatigue: false,
+      // Chills or body aches
+      aches: false,
+      // Vomiting or diarrhea
+      diarrhea: false,
+      // Loss of appetite
+      appetite: false,
+    })
+  }
+</script>

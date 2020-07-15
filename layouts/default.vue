@@ -102,11 +102,6 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        },
-        {
           icon: 'mdi-virus-outline',
           title: 'COVID',
           to: '/covid'
