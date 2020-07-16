@@ -2,6 +2,25 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12">
+        <header>Start Date</header>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" md="4">
+        <v-menu ref="menu" v-model="startDateMenu" :close-on-content-click="false" :return-value.sync="start" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field v-model="start" label="First day of symptoms" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
+          </template>
+          <v-date-picker v-model="start"
+            :allowed-dates="allowedDates"
+            no-title
+            scrollable
+            @click:date="$refs.menu.save(start)"></v-date-picker>
+        </v-menu>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
         <header>COVID Viral Test</header>
       </v-col>
     </v-row>
@@ -71,18 +90,6 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="4">
-        <v-menu ref="menu" v-model="startDateMenu" :close-on-content-click="false" :return-value.sync="start" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field v-model="start" label="First day of symptoms" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
-          </template>
-          <v-date-picker v-model="start"
-            :allowed-dates="allowedDates"
-            no-title
-            scrollable
-            @click:date="$refs.menu.save(start)"></v-date-picker>
-        </v-menu>
-      </v-col>
       <v-col cols="12" md="4">
         <v-select
           v-model="recovery"
