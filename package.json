@@ -18,7 +18,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "js-yaml": "^3.14.0",
-    "nuxt": "^2.13.0"
+    "nuxt": "^2.13.0",
+    "vuex-map-fields": "^1.4.0"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.3",

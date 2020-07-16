@@ -7,24 +7,24 @@
     </v-row>
     <v-row>
       <v-col cols="12" md="4">
-        <v-switch v-model="viral.tested" class="mx-2" label="Did you get a COVID-19 Viral test?"></v-switch>
+        <v-switch v-model="viralTested" class="mx-2" label="Did you get a COVID-19 Viral test?"></v-switch>
       </v-col>
-      <v-col cols="12" md="4" v-if="viral.tested">
-        <v-menu ref="menu" v-model="viralDateMenu" :close-on-content-click="false" :return-value.sync="viral.date" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+      <v-col cols="12" md="4" v-if="viralTested">
+        <v-menu ref="menu" v-model="viralDateMenu" :close-on-content-click="false" :return-value.sync="viralDate" transition="scale-transition" offset-y max-width="290px" min-width="290px">
           <template v-slot:activator="{ on, attrs }">
-            <v-text-field v-model="viral.date" label="Test date" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
+            <v-text-field v-model="viralDate" label="Test date" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
           </template>
-          <v-date-picker v-model="viral.date"
+          <v-date-picker v-model="viralDate"
             :allowed-dates="allowedDates"
             no-title
             scrollable
-            @click:date="$refs.menu.save(viral.date)"
+            @click:date="$refs.menu.save(viralDate)"
           ></v-date-picker>
         </v-menu>
       </v-col>
-      <v-col cols="12" md="4" v-if="viral.tested">
+      <v-col cols="12" md="4" v-if="viralTested">
         <v-select
-          v-model="viral.result"
+          v-model="viralResult"
           :items="resultsOptions"
           label="Select"
           hint="What was the test result?"
@@ -40,23 +40,23 @@
     </v-row>
     <v-row>
       <v-col cols="12" md="4">
-        <v-switch v-model="antibody.tested" class="mx-2" label="Did you get a COVID-19 Antibody test?"></v-switch>
+        <v-switch v-model="antibodyTested" class="mx-2" label="Did you get a COVID-19 Antibody test?"></v-switch>
       </v-col>
-      <v-col cols="12" md="4" v-if="antibody.tested">
-        <v-menu ref="menu" v-model="antibodyDateMenu" :close-on-content-click="false" :return-value.sync="antibody.date" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+      <v-col cols="12" md="4" v-if="antibodyTested">
+        <v-menu ref="menu" v-model="antibodyDateMenu" :close-on-content-click="false" :return-value.sync="antibodyDate" transition="scale-transition" offset-y max-width="290px" min-width="290px">
           <template v-slot:activator="{ on, attrs }">
-            <v-text-field v-model="antibody.date" label="Test date" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
+            <v-text-field v-model="antibodyDate" label="Test date" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
           </template>
-          <v-date-picker v-model="antibody.date"
+          <v-date-picker v-model="antibodyDate"
             :allowed-dates="allowedDates"
             no-title
             scrollable
-            @click:date="$refs.menu.save(antibody.date)"></v-date-picker>
+            @click:date="$refs.menu.save(antibodyDate)"></v-date-picker>
         </v-menu>
       </v-col>
-      <v-col cols="12" md="4" v-if="antibody.tested">
+      <v-col cols="12" md="4" v-if="antibodyTested">
         <v-select
-          v-model="antibody.result"
+          v-model="antibodyResult"
           :items="resultsOptions"
           label="Select"
           hint="What was the test result?"
@@ -71,6 +71,18 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col cols="12" md="4">
+        <v-menu ref="menu" v-model="startDateMenu" :close-on-content-click="false" :return-value.sync="start" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field v-model="start" label="First day of symptoms" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
+          </template>
+          <v-date-picker v-model="start"
+            :allowed-dates="allowedDates"
+            no-title
+            scrollable
+            @click:date="$refs.menu.save(start)"></v-date-picker>
+        </v-menu>
+      </v-col>
       <v-col cols="12" md="4">
         <v-select
           v-model="recovery"
@@ -95,10 +107,26 @@
 </template>
 
 <script>
+  import { mapFields } from 'vuex-map-fields';
+
   export default {
+    computed: {
+      ...mapFields('testing', {
+        viralTested: 'viral.tested',
+        viralDate: 'viral.date',
+        viralResult: 'viral.result',
+        antibodyTested: 'antibody.tested',
+        antibodyDate: 'antibody.date',
+        antibodyResult: 'antibody.result',
+        start: 'start',
+        recovery: 'recovery',
+        doctors: 'doctors',
+      }),
+    },
     data: () => ({
       antibodyDateMenu: false,
       viralDateMenu: false,
+      startDateMenu: false,
       resultsOptions: [
         'Positive',
         'Negative',
@@ -118,21 +146,6 @@
         'Hospitalized',
       ],
       today: new Date(),
-      // Did you receive an antibody test?
-      antibody: {
-        tested: false,
-        date: null,
-        result: '',
-      },
-      // Did you receive a viral test?
-      viral: {
-        tested: false,
-        date: null,
-        result: '',
-      },
-      recovery: '',
-      // Did you see a doctor?
-      doctors: [],
     }),
     methods: {
       // dont show days after now

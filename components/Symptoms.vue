@@ -37,26 +37,21 @@
 </template>
 
 <script>
+  import { mapFields } from 'vuex-map-fields';
+  
   export default {
-    data: () => ({
-      // Fever above 100F?
-      fever: false,
-      // Congestion or runny nose
-      congestion: false,
-      // Loss of taste or smell
-      senses: false,
-      // Shortness of breath or difficulty breathing
-      breathing: false,
-      // Cough
-      cough: false,
-      // Unusual fatigue
-      fatigue: false,
-      // Chills or body aches
-      aches: false,
-      // Vomiting or diarrhea
-      diarrhea: false,
-      // Loss of appetite
-      appetite: false,
-    })
+    computed: {
+      ...mapFields('symptoms', [
+        'fever',
+        'congestion',
+        'senses',
+        'breathing',
+        'cough',
+        'fatigue',
+        'aches',
+        'diarrhea',
+        'appetite',
+      ]),
+    },
   }
 </script>
