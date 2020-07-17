@@ -1,9 +1,38 @@
 <template>
   <v-form v-model="valid">
-    <testing />
-    <symptoms />
-    <transmission />
-    <politics />
+    <v-stepper v-model="step" alt-labels>
+      <v-stepper-header>
+        <v-stepper-step key="testing" :complete="testingDone" step="1" editable>Testing</v-stepper-step>
+        <v-divider />
+        <v-stepper-step key="symptoms" :complete="symptomsDone" step="2" editable>Symptoms</v-stepper-step>
+        <v-divider />
+        <v-stepper-step key="transmission" :complete="transmissionDone" step="3" editable>Transmission</v-stepper-step>
+        <v-divider />
+        <v-stepper-step key="politics" :complete="politicsDone" step="4" editable>Politics</v-stepper-step>
+      </v-stepper-header>
+      <v-stepper-items>
+        <v-stepper-content step="1">
+          <v-card class="mb-5">
+            <testing />
+          </v-card>
+        </v-stepper-content>
+        <v-stepper-content step="2">
+          <v-card class="mb-5">
+            <symptoms />
+          </v-card>
+        </v-stepper-content>
+        <v-stepper-content step="3">
+          <v-card class="mb-5">
+            <transmission />
+          </v-card>
+        </v-stepper-content>
+        <v-stepper-content step="4">
+          <v-card class="mb-5">
+            <politics />
+          </v-card>
+        </v-stepper-content>
+      </v-stepper-items>
+    </v-stepper>
   </v-form>
 </template>
 
@@ -12,14 +41,26 @@
 
   export default {
     computed: {
-      testing() {
-        console.log(this.$store.state);
-
-        return this.$store.state.testing;
+      progress() {
+        return this.step/this.totalSteps;
+      },
+      testingDone() {
+        return false;
+      },
+      symptomsDone() {
+        return false;
+      },
+      transmissionDone() {
+        return false;
+      },
+      politicsDone() {
+        return false;
       }
     },
     data: () => ({
       valid: false,
+      step: 1,
+      totalSteps: 4,
       location: {
         coords: {
           accuracy: 0,

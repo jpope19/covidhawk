@@ -1,11 +1,6 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12">
-        <header>COVID Transmission</header>
-      </v-col>
-    </v-row>
-    <v-row>
       <v-col cols="12" md="4">
         <v-switch v-model="airplane" class="mx-2" label="Have you been on an airplane in the past two weeks?"></v-switch>
       </v-col>

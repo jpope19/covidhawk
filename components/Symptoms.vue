@@ -1,10 +1,6 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12">
-        <header>COVID Symptoms</header>
-        <v-subheader>Select all that apply</v-subheader>
-      </v-col>
       <v-col cols="12" md="4">
         <v-switch v-model="fever" class="mx-2" label="Fever above 100F"></v-switch>
       </v-col>
