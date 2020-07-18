@@ -47,9 +47,8 @@ function getIndexSettings() {
  */
 async function postCovid(body) {
   return client
-    .create({
-      COVID_INDEX,
-      id,
+    .index({
+      index: COVID_INDEX,
       body,
     })
     .then(resp => {

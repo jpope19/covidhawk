@@ -19,16 +19,12 @@ _doc:
               type: date
             result:
               type: keyword
+        start:
+          type: date
         recovery:
           type: keyword
         doctors:
-          properties:
-            urgent:
-              type: boolean
-            er:
-              type: boolean
-            hospitalized:
-              type: boolean
+          type: keyword
     symptoms:
       properties:
         fever:
@@ -49,31 +45,47 @@ _doc:
           type: boolean
         appetite:
           type: boolean
-    contraction:
+    transmission:
       properties:
-        days:
+        lag:
           type: keyword
-        mask:
+        location:
+          type: keyword
+        locationOther:
+          type: text
+        maskIn:
+          type: keyword
+        maskOut:
           type: keyword
         housing:
           type: keyword
-        cautiousness:
+        roommates:
           type: keyword
-        news:
+        work:
           type: keyword
-        newstoo:
+        contacts:
           type: keyword
-        newsthree:
-          type: keyword
-        travel:
-          type: keyword
-        test:
+        airplane:
           type: boolean
-        antibody:
+        hotel:
           type: boolean
         exercise:
           type: keyword
+        gym:
+          type: boolean
+        cautiousness:
+          type: keyword
+    personal:
+      properties:
+        age:
+          type: keyword
+        gender:
+          type: keyword
+        race:
+          type: keyword
     location:
-      type: geo_point
-
-  
+      properties:
+        zipcode:
+          type: keyword
+        coords:
+          type: geo_point
