@@ -4,7 +4,7 @@ const elastic = require('./elasticsearch'),
   bodyParser = require('body-parser'),
   // Check if we need to run Nuxt in development mode
   isDev = process.env.NODE_ENV !== 'production',
-  port = process.env.PORT || 3000;
+  port = process.env.PORT || 80;
 
 elastic.init().then(() => {
   // Get a ready to use Nuxt instance

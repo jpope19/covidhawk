@@ -2,42 +2,44 @@
   <v-form v-model="valid">
     <v-stepper v-model="step" alt-labels>
       <v-stepper-header>
-        <v-stepper-step key="testing" :complete="testingDone" step="1" editable>Testing</v-stepper-step>
+        <v-stepper-step key="testing" :complete="testingDone" step="1">Testing</v-stepper-step>
         <v-divider />
-        <v-stepper-step key="symptoms" :complete="symptomsDone" step="2" editable>Symptoms</v-stepper-step>
+        <v-stepper-step key="symptoms" :complete="symptomsDone" step="2">Symptoms</v-stepper-step>
         <v-divider />
-        <v-stepper-step key="transmission" :complete="transmissionDone" step="3" editable>Transmission</v-stepper-step>
+        <v-stepper-step key="transmission" :complete="transmissionDone" step="3">Transmission</v-stepper-step>
         <v-divider />
-        <v-stepper-step key="politics" :complete="politicsDone" step="4" editable>Politics</v-stepper-step>
+        <v-stepper-step key="politics" :complete="politicsDone" step="4">Politics</v-stepper-step>
       </v-stepper-header>
       <v-stepper-items>
         <v-stepper-content step="1">
-          <v-card class="mb-5">
+          <v-card class="mb-5" outlined>
             <testing />
           </v-card>
         </v-stepper-content>
         <v-stepper-content step="2">
-          <v-card class="mb-5">
+          <v-card class="mb-5" outlined>
             <symptoms />
           </v-card>
         </v-stepper-content>
         <v-stepper-content step="3">
-          <v-card class="mb-5">
+          <v-card class="mb-5" outlined>
             <transmission />
           </v-card>
         </v-stepper-content>
         <v-stepper-content step="4">
-          <v-card class="mb-5">
+          <v-card class="mb-5" outlined>
             <politics />
           </v-card>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
+    <navigation />
   </v-form>
 </template>
 
 <script>
   import fetch from 'node-fetch';
+  import { mapFields } from 'vuex-map-fields';
 
   export default {
     computed: {
@@ -55,12 +57,15 @@
       },
       politicsDone() {
         return false;
-      }
+      },
+      ...mapFields('navigation', [
+        'step',
+        'totalSteps',
+      ]),
     },
     data: () => ({
+      RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
       valid: false,
-      step: 1,
-      totalSteps: 4,
       location: {
         coords: {
           accuracy: 0,
@@ -81,6 +86,8 @@
       }
 
       const self = this;
+
+      this.totalSteps = 4;
 
       // setInterval(function() {
       //   console.log(self.$store.state.transmission);
@@ -104,6 +111,13 @@
           //   3: timed out
         }
       );
+    },
+    head() {
+      return {
+        script: [
+          { src: 'https://www.google.com/recaptcha/api.js?render=explicit', async: true, defer: true },
+        ],
+      };
     }
   }
 </script>
