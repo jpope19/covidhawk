@@ -1,6 +1,6 @@
 <template>
-  <v-form v-model="valid">
-    <v-stepper v-model="step" alt-labels>
+  <v-form>
+    <v-stepper v-model="step" alt-labels @change="gotoStep">
       <v-stepper-header>
         <v-stepper-step key="testing" :complete="testingDone" editable step="1">Testing</v-stepper-step>
         <v-divider />
@@ -64,21 +64,12 @@
     },
     data: () => ({
       RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
-      valid: false,
-      location: {
-        coords: {
-          accuracy: 0,
-          altitude: null,
-          altitudeAccuracy: null,
-          heading: null,
-          // i guess we can get zip code from long/lat?
-          latitude: 0,
-          longitude: 0,
-          speed: 0,
-        },
-        timestamp: 0,
-      },
     }),
+    methods: {
+      gotoStep(a) {
+        this.step = parseInt(a);
+      }
+    },
     mounted () {
       const self = this;
 

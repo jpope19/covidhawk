@@ -44,6 +44,7 @@ export const state = () => ({
     lag: '',
     // Where do you think you contracted COVID19? 
     location: '',
+    locationOther: '',
     // How often did you wear a mask around people indoors? Very often, often, rarely, never
     // How often did you wear a mask around people outdoors? Very often, often, rarely, never
     maskIn: '',

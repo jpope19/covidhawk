@@ -29,6 +29,9 @@
         ></v-select>
       </v-col>
       <v-col cols="12" md="4">
+        <v-text-field v-model="locationOther" hint="Location (specific)" persistent-hint></v-text-field>
+      </v-col>
+      <v-col cols="12" md="4">
         <v-select
           v-model="maskIn"
           :items="maskOptions"
@@ -112,6 +115,7 @@
       ...mapFields('covid', [
         'transmission.lag',
         'transmission.location',
+        'transmission.locationOther',
         'transmission.maskIn',
         'transmission.maskOut',
         'transmission.housing',
@@ -141,6 +145,7 @@
         'hotel',
         'restaurant',
         'retail store',
+        'other',
       ],
       maskOptions: [
         'very often',
