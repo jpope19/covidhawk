@@ -44,14 +44,12 @@
         this.step = Math.max(1,this.step - 1)
       },
       submit() {
-        console.log(JSON.stringify(this.$store.state.covid));
-        
         if (this.recaptcha) {
-          // fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ symptoms: this.symptoms, contraction: this.contraction }) })
-          //   .then(res => res.json())
-          //   .then(res => {
-          //     console.log('res', res);
-          //   });
+          fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.$store.state.covid) })
+            .then(res => res.json())
+            .then(res => {
+              console.log('res', res);
+            });
         }
       }
     }
