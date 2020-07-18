@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div id="recaptcha" class="g-recaptcha" data-sitekey="6LetuLIZAAAAAAE2SL2BafVx5BeHKi37q2RpW0-A"></div>
+    <div id="recaptcha" :class=" step !== totalSteps ? 'g-recaptcha hidden' : 'g-recaptcha'" data-sitekey="6LetuLIZAAAAAAE2SL2BafVx5BeHKi37q2RpW0-A"></div>
   </v-container>
 </template>
 
@@ -8,6 +8,10 @@
   #recaptcha {
     display: flex;
     justify-content: center;
+  }
+
+  #recaptcha.hidden {
+    display: none;
   }
 </style>
 
@@ -18,7 +22,11 @@
 
   export default {
     computed: {
-      ...mapFields('navigation', [ 'recaptcha' ])
+      ...mapFields('navigation', [ 
+        'step',
+        'totalSteps',
+        'recaptcha' 
+      ])
     },
     data: () => ({
       interval: undefined
