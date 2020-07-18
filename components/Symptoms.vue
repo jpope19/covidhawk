@@ -37,16 +37,16 @@
   
   export default {
     computed: {
-      ...mapFields('symptoms', [
-        'fever',
-        'congestion',
-        'senses',
-        'breathing',
-        'cough',
-        'fatigue',
-        'aches',
-        'diarrhea',
-        'appetite',
+      ...mapFields('covid', [
+        'symptoms.fever',
+        'symptoms.congestion',
+        'symptoms.senses',
+        'symptoms.breathing',
+        'symptoms.cough',
+        'symptoms.fatigue',
+        'symptoms.aches',
+        'symptoms.diarrhea',
+        'symptoms.appetite',
       ]),
     },
   }

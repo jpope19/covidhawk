@@ -2,13 +2,13 @@
   <v-form v-model="valid">
     <v-stepper v-model="step" alt-labels>
       <v-stepper-header>
-        <v-stepper-step key="testing" :complete="testingDone" step="1">Testing</v-stepper-step>
+        <v-stepper-step key="testing" :complete="testingDone" editable step="1">Testing</v-stepper-step>
         <v-divider />
-        <v-stepper-step key="symptoms" :complete="symptomsDone" step="2">Symptoms</v-stepper-step>
+        <v-stepper-step key="symptoms" :complete="symptomsDone" editable step="2">Symptoms</v-stepper-step>
         <v-divider />
-        <v-stepper-step key="transmission" :complete="transmissionDone" step="3">Transmission</v-stepper-step>
+        <v-stepper-step key="transmission" :complete="transmissionDone" editable step="3">Transmission</v-stepper-step>
         <v-divider />
-        <v-stepper-step key="politics" :complete="politicsDone" step="4">Politics</v-stepper-step>
+        <v-stepper-step key="personal" :complete="personalDone" editable step="4">Optional</v-stepper-step>
       </v-stepper-header>
       <v-stepper-items>
         <v-stepper-content step="1">
@@ -28,7 +28,7 @@
         </v-stepper-content>
         <v-stepper-content step="4">
           <v-card class="mb-5" outlined>
-            <politics />
+            <personal />
           </v-card>
         </v-stepper-content>
       </v-stepper-items>
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-  import fetch from 'node-fetch';
   import { mapFields } from 'vuex-map-fields';
 
   export default {
@@ -55,7 +54,7 @@
       transmissionDone() {
         return false;
       },
-      politicsDone() {
+      personalDone() {
         return false;
       },
       ...mapFields('navigation', [
@@ -81,36 +80,14 @@
       },
     }),
     mounted () {
-      if (!navigator || !navigator.geolocation) {
-        // redirect to how to page that tells user to use current browser and allow location
-      }
-
       const self = this;
 
+      // if we don't have location, send back to the home page
+      if (!(this.$store.state.covid.location.zipcode || (this.$store.state.covid.location.coords.latitude && this.$store.state.covid.location.coords.longitude))) {
+        this.$nuxt.$router.push('/');
+      }
+
       this.totalSteps = 4;
-
-      // setInterval(function() {
-      //   console.log(self.$store.state.transmission);
-      // }, 5000);
-
-      // fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ symptoms: this.symptoms, contraction: this.contraction }) })
-      //   .then(res => res.json())
-      //   .then(res => {
-      //     console.log('res', res);
-      //   });
-
-      navigator.geolocation.getCurrentPosition(pos => {
-          console.log(pos);
-          self.location = pos;
-        }, err => {
-          console.log('Error occurred. Error code: ' + err.code);
-          // error.code can be:
-          //   0: unknown error
-          //   1: permission denied
-          //   2: position unavailable (error response from location provider)
-          //   3: timed out
-        }
-      );
     },
     head() {
       return {

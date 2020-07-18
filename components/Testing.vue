@@ -118,16 +118,16 @@
 
   export default {
     computed: {
-      ...mapFields('testing', {
-        viralTested: 'viral.tested',
-        viralDate: 'viral.date',
-        viralResult: 'viral.result',
-        antibodyTested: 'antibody.tested',
-        antibodyDate: 'antibody.date',
-        antibodyResult: 'antibody.result',
-        start: 'start',
-        recovery: 'recovery',
-        doctors: 'doctors',
+      ...mapFields('covid', {
+        viralTested: 'testing.viral.tested',
+        viralDate: 'testing.viral.date',
+        viralResult: 'testing.viral.result',
+        antibodyTested: 'testing.antibody.tested',
+        antibodyDate: 'testing.antibody.date',
+        antibodyResult: 'testing.antibody.result',
+        start: 'testing.start',
+        recovery: 'testing.recovery',
+        doctors: 'testing.doctors',
       }),
     },
     data: () => ({

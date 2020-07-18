@@ -15,7 +15,7 @@
           v-model="lag"
           :items="lagOptions"
           label="Select"
-          hint="When do you think you contracted COVID19?"
+          hint="How many days before symptoms do you think you contracted COVID19?"
           persistent-hint
         ></v-select>
       </v-col>
@@ -109,27 +109,27 @@
 
   export default {
     computed: {
-      ...mapFields('transmission', [
-        'lag',
-        'location',
-        'maskIn',
-        'maskOut',
-        'housing',
-        'roommates',
-        'work',
-        'contacts',
-        'airplane',
-        'hotel',
-        'exercise',
-        'gym',
-        'cautiousness'
+      ...mapFields('covid', [
+        'transmission.lag',
+        'transmission.location',
+        'transmission.maskIn',
+        'transmission.maskOut',
+        'transmission.housing',
+        'transmission.roommates',
+        'transmission.work',
+        'transmission.contacts',
+        'transmission.airplane',
+        'transmission.hotel',
+        'transmission.exercise',
+        'transmission.gym',
+        'transmission.cautiousness',
       ]),
     },
     data: () => ({
       lagOptions: [
-        '1-2 days ago',
-        '3-7 days ago',
-        '1+ week ago',
+        '1-2 days',
+        '3-7 days',
+        '1+ week',
         'Unknown',
       ],
       locationOptions: [
@@ -143,7 +143,7 @@
         'retail store',
       ],
       maskOptions: [
-        'Very often',
+        'very often',
         'often',
         'rarely',
         'never',
