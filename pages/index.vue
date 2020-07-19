@@ -110,9 +110,9 @@ export default {
 
       navigator.geolocation.getCurrentPosition(pos => {
         console.log(pos);
-        if (pos && pos.coords && pos.coords.lat && pos.coords.lon) {
-          self.lat = pos.coords.lat;
-          self.lon = pos.coords.lon;
+        if (pos && pos.coords && pos.coords.latitude && pos.coords.longitude) {
+          self.lat = pos.coords.latitude;
+          self.lon = pos.coords.longitude;
         } else {
           self.locationFailed = true;
         }

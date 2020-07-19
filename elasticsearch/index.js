@@ -20,10 +20,10 @@ const fs = require('fs'),
         },
       })
     : new Client({
-      node: HOST,
-      maxRetries: 5,
-      requestTimeout: 60000,
-    }),
+        node: HOST,
+        maxRetries: 5,
+        requestTimeout: 60000,
+      }),
   COVID_INDEX = 'illness',
   MAPPINGS_PATH = path.join(__dirname, 'mappings'),
   ELASTIC_MAPPINGS = fs.readdirSync(MAPPINGS_PATH) || [];
