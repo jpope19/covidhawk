@@ -2,8 +2,9 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <v-card>
-        <v-card-title class="headline">COVID Hawk</v-card-title>
-        <v-card-subtitle>Unifying to Defeat COVID</v-card-subtitle>
+        <v-card-title class="headline">
+          <v-img src="/CovidHawk_Logo_Navy_Horizontal-01.png" width="280"></v-img>
+        </v-card-title>
         <v-card-text>
           <v-divider></v-divider>
           <v-layout justify-center align-center>
@@ -68,6 +69,15 @@
           </v-layout>
         </v-card-actions>
       </v-card>
+        <v-overlay :value="overlay">
+          <v-sheet class="px-3 pt-3 pb-3" light>
+            <v-img src="/CovidHawk_Logo_GraphicOnly_Navy-01-01.png" width="280"></v-img>
+            <v-skeleton-loader
+              width="280"
+              type="list-item-two-line"
+            ></v-skeleton-loader>
+          </v-sheet>
+        </v-overlay>
     </v-flex>
   </v-layout>
 </template>
@@ -90,6 +100,7 @@ export default {
       (val) => !!val && !!val.match(/^\d{5}$/),
     ],
     searchZip: null,
+    overlay: false,
   }),
   computed: {
     ...mapFields('covid', [
@@ -108,6 +119,8 @@ export default {
     detectLocation() {
       const self = this;
 
+      this.overlay = true;
+
       navigator.geolocation.getCurrentPosition(pos => {
         console.log(pos);
         if (pos && pos.coords && pos.coords.latitude && pos.coords.longitude) {
@@ -122,6 +135,7 @@ export default {
       }, err => {
         console.log('Error occurred. Error code: ' + err.code);
         self.locationFailed = true;
+        self.overlay = false;
 
         // error.code can be:
         //   0: unknown error
