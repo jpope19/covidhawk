@@ -14,7 +14,11 @@ function confirmToken(token) {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   }).then(res => {
-    return res && res.data && res.data.success;
+    const success = res && res.data && res.data.success;
+
+    if (!success) console.log(res);
+
+    return success;
   }).catch(e => {
     console.log(e);
     return false;
