@@ -6,7 +6,7 @@ const fs = require('fs'),
   path = require('path'),
   yaml = require('js-yaml'),
   { Client } = require('@elastic/elasticsearch'),
-  HOST = process.env.ELASTICSEARCH_HOST,
+  HOST = process.env.FOUNDELASTICSEARCH_URL || process.env.ELASTICSEARCH_HOST,
   client = new Client({
     node: HOST,
     maxRetries: 5,
