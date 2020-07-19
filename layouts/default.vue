@@ -47,7 +47,7 @@ export default {
           to: '/covid'
         }
       ],
-      title: 'COVID Tracker'
+      title: 'COVID Hawk'
     }
   }
 }

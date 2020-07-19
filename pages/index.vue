@@ -2,7 +2,7 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <v-card>
-        <v-card-title class="headline">App Name</v-card-title>
+        <v-card-title class="headline">COVID Hawk</v-card-title>
         <v-card-subtitle>Unifying to Defeat COVID</v-card-subtitle>
         <v-card-text>
           <v-divider></v-divider>
