@@ -1,3 +1,5 @@
+'use strict';
+
 const usZips = require('us-zips');
 
 /**
@@ -18,7 +20,7 @@ function makeSureBodyHasLocation(body) {
     }
   }
 
-  return body;
+  return body && body.location && body.location.coords && body.location.coords.lat && body.location.coords.lon ? body : false;
 }
 
 /**

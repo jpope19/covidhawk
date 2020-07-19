@@ -1,23 +1,31 @@
 const express = require('express'),
   app = express(),
   elastic = require('../elasticsearch'),
-  geolocation = require('./helpers/geolocation');
+  geolocation = require('./helpers/geolocation'),
+  recaptcha = require('./helpers/recaptcha');
 
 app.get('/', (req, res) => {
   res.json({ it: 'works!' });
 });
 
-app.post('/covid', 
+app.post('/covid',
   (req, res, next) => {
-    console.log('hello world!');
-    geolocation.makeSureBodyHasLocation(req.body);
-    next();
+    recaptcha.confirmToken(req.body.recaptcha).then(bool => {
+      if (bool) return next();
+      else res.status(500).send('Trouble validating reCAPTCHA');
+    });
   },
   (req, res, next) => {
-    console.log('hell world as well!');
-    elastic.postCovid(req.body).then(body => {
+    if (geolocation.makeSureBodyHasLocation(req.body.covid)) next();
+    else res.status(500).send('Trouble validating location');
+  },
+  (req, res, next) => {
+    elastic.postCovid(req.body.covid).then(body => {
       res.json(body);
-    }).catch(next);
+    }).catch(e => {
+      console.log(e);
+      res.status(500).send('Trouble posting to Elasticsearch');
+    });
   }
 );
 

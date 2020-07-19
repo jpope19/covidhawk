@@ -49,11 +49,15 @@
       submit() {
         this.submitted = true;
         if (this.recaptcha) {
-          fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.$store.state.covid) })
-            .then(res => res.json())
-            .then(res => {
-              console.log('res', res);
-            });
+          fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+              covid: this.$store.state.covid,
+              recaptcha: this.recaptcha,
+            })
+          })
+          .then(res => res.json())
+          .then(res => {
+            console.log('res', res);
+          });
         }
       }
     }
