@@ -49,6 +49,10 @@ export const state = () => ({
     // How often did you wear a mask around people outdoors? Very often, often, rarely, never
     maskIn: '',
     maskOut: '',
+    // how often do you replace or clean your mask?
+    maskReuse: '',
+    // how often do you wash your hands?
+    hands: '',
     // What type of home do you live in? single-family, townhome, small apartment/condominium complex, large apartment/condominium complex
     housing: '',
     // How many others live in your household? 0, 1, 2, 3+

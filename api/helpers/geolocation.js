@@ -1,7 +1,7 @@
 const usZips = require('us-zips');
 
 /**
- * 
+ * sometimes we only get passed a zipcode. make sure we have lat/lon
  * @param {Object} body
  * @param {Object} body.location
  * @param {string} body.location.zipcode

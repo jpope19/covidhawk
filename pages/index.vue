@@ -107,9 +107,6 @@ export default {
       this.locationFailed = true;
     },
   },
-  mounted() {
-    console.log('hello', Object.keys(usZips).length);
-  },
   watch: {
     searchZip(val) {
       this.items = !!val ? Object.keys(usZips).filter(zip => zip.startsWith(val)) : [];

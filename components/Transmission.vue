@@ -51,6 +51,24 @@
       </v-col>
       <v-col cols="12" md="4">
         <v-select
+          v-model="maskReuse"
+          :items="maskReuseOptions"
+          label="Select"
+          hint="How often do you replace or clean your mask?"
+          persistent-hint
+        ></v-select>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-select
+          v-model="hands"
+          :items="handsOptions"
+          label="Select"
+          hint="How often do you wash your hands?"
+          persistent-hint
+        ></v-select>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-select
           v-model="housing"
           :items="housingOptions"
           label="Select"
@@ -118,6 +136,8 @@
         'transmission.locationOther',
         'transmission.maskIn',
         'transmission.maskOut',
+        'transmission.maskReuse',
+        'transmission.hands',
         'transmission.housing',
         'transmission.roommates',
         'transmission.work',
@@ -153,7 +173,12 @@
         'rarely',
         'never',
       ],
+      maskReuseOptions: [
 
+      ],
+      handsOptions: [
+
+      ],
       housingOptions: [
         'single-family',
         'townhome',

@@ -34,16 +34,20 @@
         'step',
         'totalSteps',
         'recaptcha',
+        'submitted',
       ]),
     },
     methods: {
       next() {
         this.step = Math.min(this.totalSteps, this.step + 1);
+        this.$vuetify.goTo(0);
       },
       previous() {
-        this.step = Math.max(1,this.step - 1)
+        this.step = Math.max(1,this.step - 1);
+        this.$vuetify.goTo(0);
       },
       submit() {
+        this.submitted = true;
         if (this.recaptcha) {
           fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.$store.state.covid) })
             .then(res => res.json())
