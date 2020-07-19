@@ -15,8 +15,8 @@
                 Even if everyone who wanted a test, could get a test, we are still looking at a valuable 2 to 5 week time period from when first symptoms appear to when a person gets counted as a COVID positive.
               </p>
               <p>
-                By working together, we can use historical data, as well as new symptomatic cases, to get rid of the lag. If we all anonymously can input what we individually know about the virus, we can really make a difference.
-                This application gives us the chance to document and give a voice to all 3.78 million and counting victims of COVID-19 in the United States (and maybe globally).
+                By working together, we can use historical data, as well as new symptomatic cases, to get rid of the lag. If we all anonymously input what we individually know about the virus, we can really make a difference.
+                This application gives us the chance to document and give a voice to all 3.78 million and counting victims of COVID-19 in the United States.
               </p>
               <p>
                 Let's all unite and defeat COVID-19.

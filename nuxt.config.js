@@ -72,9 +72,9 @@ export default {
           success: colors.green.accent3,
         },
         light: {
-          primary: colors.red.darken1,
-          secondary: colors.red.lighten4,
-          accent: colors.indigo.base,
+          primary: colors.blue.darken1,
+          secondary: colors.blue.lighten3,
+          accent: colors.blue.accent3,
         }
       }
     }

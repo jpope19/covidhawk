@@ -63,7 +63,7 @@
           v-model="hands"
           :items="handsOptions"
           label="Select"
-          hint="How often do you wash your hands?"
+          hint="How many times do you wash your hands per day?"
           persistent-hint
         ></v-select>
       </v-col>
@@ -174,10 +174,17 @@
         'never',
       ],
       maskReuseOptions: [
-
+        'after every usage',
+        'every day',
+        'every week',
+        'more than a week',
+        'never',
       ],
       handsOptions: [
-
+        '0-2 times',
+        '3-5 times',
+        '6-9 times',
+        '10+ times',
       ],
       housingOptions: [
         'single-family',

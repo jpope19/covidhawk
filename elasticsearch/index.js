@@ -51,10 +51,7 @@ async function postCovid(body) {
       index: COVID_INDEX,
       body,
     })
-    .then(resp => {
-      console.log(JSON.stringify(resp));
-      return body;
-    });
+    .then(() => body);
 }
 
 /**
