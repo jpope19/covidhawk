@@ -7,11 +7,23 @@ const fs = require('fs'),
   yaml = require('js-yaml'),
   { Client } = require('@elastic/elasticsearch'),
   HOST = process.env.FOUNDELASTICSEARCH_URL || process.env.ELASTICSEARCH_HOST,
-  client = new Client({
-    node: HOST,
-    maxRetries: 5,
-    requestTimeout: 60000,
-  }),
+  CLOUD_ID = process.env.ELASTICSEARCH_CLOUD_ID,
+  PW = process.env.ELASTICSEARCH_PASSWORD,
+  client = CLOUD_ID
+    ? new Client({
+        cloud: {
+          id: CLOUD_ID,
+        },
+        auth: {
+          username: 'elastic',
+          password: PW
+        },
+      })
+    : new Client({
+      node: HOST,
+      maxRetries: 5,
+      requestTimeout: 60000,
+    }),
   COVID_INDEX = 'illness',
   MAPPINGS_PATH = path.join(__dirname, 'mappings'),
   ELASTIC_MAPPINGS = fs.readdirSync(MAPPINGS_PATH) || [];
