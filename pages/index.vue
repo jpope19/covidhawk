@@ -73,11 +73,11 @@ export default {
   computed: {
     ...mapFields('covid', [
       'location.zipcode',
-      'location.coords.latitude',
-      'location.coords.longitude',
+      'location.coords.lat',
+      'location.coords.lon',
     ]),
     valid() {
-      return this.zipcode || (this.latitude && this.longitude);
+      return this.zipcode || (this.lat && this.lon);
     }
   },
   methods: {
@@ -86,9 +86,9 @@ export default {
 
       navigator.geolocation.getCurrentPosition(pos => {
         console.log(pos);
-        if (pos && pos.coords && pos.coords.latitude && pos.coords.longitude) {
-          self.latitude = pos.coords.latitude;
-          self.longitude = pos.coords.longitude;
+        if (pos && pos.coords && pos.coords.lat && pos.coords.lon) {
+          self.lat = pos.coords.lat;
+          self.lon = pos.coords.lon;
         } else {
           self.locationFailed = true;
         }
@@ -112,7 +112,7 @@ export default {
   },
   watch: {
     searchZip(val) {
-      this.items = Object.keys(usZips).filter(zip => zip.startsWith(val));
+      this.items = !!val ? Object.keys(usZips).filter(zip => zip.startsWith(val)) : [];
     }
   }
 }

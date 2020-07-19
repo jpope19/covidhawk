@@ -6,14 +6,14 @@ const usZips = require('us-zips');
  * @param {Object} body.location
  * @param {string} body.location.zipcode
  * @param {Object} body.location.coords
- * @param {number} body.location.coords.latitude
- * @param {number} body.location.coords.longitude
+ * @param {number} body.location.coords.lat
+ * @param {number} body.location.coords.lon
  * @returns {Object}
  */
 function makeSureBodyHasLocation(body) {
   // if we somehow got a request without a location, wtf, idk.
   if (body && body.location && body.location.coords) {
-    if (body.location.zipcode && !(body.location.coords.latitude || body.location.coords.longitude)) {
+    if (body.location.zipcode && !(body.location.coords.lat || body.location.coords.lon)) {
       body.location.coords = zipToLatLon(body.location.zipcode);
     }
   }
@@ -27,7 +27,9 @@ function makeSureBodyHasLocation(body) {
  * @returns {Object}
  */
 function zipToLatLon(zip) {
-  return usZips[zip] || { latitude: null, longitude: null };
+  const latLon = usZips[zip] || {latitude: null, longitude: null };
+
+  return { lat: latLon.latitude, lon: latLon.longitude };
 }
 
 module.exports.makeSureBodyHasLocation = makeSureBodyHasLocation;

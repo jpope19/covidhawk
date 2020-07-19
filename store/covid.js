@@ -75,8 +75,8 @@ export const state = () => ({
   location: {
     zipcode: '',
     coords: {
-      latitude: null,
-      longitude: null,
+      lat: null,
+      lon: null,
     },
   },
 });

@@ -42,8 +42,8 @@
         'personal.gender',
         'personal.race',
         'location.zipcode',
-        'location.coords.latitude',
-        'location.coords.longitude',
+        'location.coords.lat',
+        'location.coords.lon',
       ]),
     },
     data: () => ({

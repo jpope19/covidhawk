@@ -54,6 +54,11 @@ async function postCovid(body) {
     .then(resp => {
       console.log(JSON.stringify(resp));
       return body;
+    })
+    .catch(e => {
+      console.log('am i breaking?');
+      console.log(JSON.stringify(e));
+      return {};
     });
 }
 
