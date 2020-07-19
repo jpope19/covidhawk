@@ -7,6 +7,27 @@
         <v-card-text>
           <v-divider></v-divider>
           <v-layout justify-center align-center>
+            <v-flex xs12 md8 text-center mt-4>
+              <h3 class="pb-2">About Us</h3>
+              <p>
+                Our goal is to give the public a chance to help end the COVID pandemic.
+                Currently, our testing situation has improved, but it is still not where it needs to be.
+                Even if everyone who wanted a test, could get a test, we are still looking at a valuable 2 to 5 week time period from when first symptoms appear to when a person gets counted as a COVID positive.
+              </p>
+              <p>
+                By working together, we can use historical data, as well as new symptomatic cases, to get rid of the lag. If we all anonymously can input what we individually know about the virus, we can really make a difference.
+                This application gives us the chance to document and give a voice to all 3.78 million and counting victims of COVID-19 in the United States (and maybe globally).
+              </p>
+              <p>
+                Let's all unite and defeat COVID-19.
+              </p>
+              <p>
+                These questions might not be the answer but the more knowledge we have, the better equipped we are. Please take next 10 minutes to give your experience a voice.
+              </p>
+            </v-flex>
+          </v-layout>
+          <v-divider></v-divider>
+          <v-layout justify-center align-center v-if="!submitted">
             <v-flex xs12 md8 text-center mt-4 v-if="!locationFailed">
               <p>The only personal information we collect is your general location. You can allow us to detect your location, or you can manually enter your zip code.</p>
               <p><a href="https://support.google.com/maps/answer/2839911" target="_blank" rel="noopener noreferrer">Here is some more information</a> on troubleshooting if you are having trouble with location.</p>
@@ -30,7 +51,7 @@
             </v-flex>
           </v-layout>
         </v-card-text>
-        <v-card-actions class="text-center">
+        <v-card-actions class="text-center" v-if="!submitted">
           <v-layout>
             <v-row class="justify-center">
               <v-flex xs12 text-center mb-4 v-if="!locationFailed">
@@ -40,7 +61,7 @@
               <v-flex xs12 text-center mb-4 v-if="locationFailed">
                 <v-btn color="primary" nuxt to="/covid" :disabled="!valid">Continue</v-btn>
               </v-flex>
-              <v-flex xs12 md8 mt-1 mb-4>
+              <v-flex xs12 md8 mt-1 mb-4 pl-2 pr-2>
                 <p class="shout font-weight-black text--secondary">We promise to only use location data to be able to graph the migration of COVID. Your responses are 100% anonymous.*</p>
               </v-flex>
             </v-row>
@@ -75,6 +96,9 @@ export default {
       'location.zipcode',
       'location.coords.lat',
       'location.coords.lon',
+    ]),
+    ...mapFields('navigation', [
+      'submitted',
     ]),
     valid() {
       return this.zipcode || (this.lat && this.lon);
