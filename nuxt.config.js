@@ -72,7 +72,7 @@ export default {
           success: colors.green.accent3,
         },
         light: {
-          primary: colors.blue.darken1,
+          primary: '#0d47a1',
           secondary: colors.blue.lighten3,
           accent: colors.blue.accent3,
         }
