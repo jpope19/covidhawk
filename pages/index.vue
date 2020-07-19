@@ -113,6 +113,9 @@ export default {
         if (pos && pos.coords && pos.coords.latitude && pos.coords.longitude) {
           self.lat = pos.coords.latitude;
           self.lon = pos.coords.longitude;
+
+          // forward to survey
+          this.$nuxt.$router.push('/covid');
         } else {
           self.locationFailed = true;
         }
