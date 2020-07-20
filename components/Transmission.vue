@@ -11,6 +11,9 @@
         <v-switch v-model="gym" class="mx-2" label="Have you been in a gym in the past two weeks?"></v-switch>
       </v-col>
       <v-col cols="12" md="4">
+        <v-switch v-model="smoke" class="mx-2" label="Do you smoke?"></v-switch>
+      </v-col>
+      <v-col cols="12" md="4">
         <v-select
           v-model="lag"
           :items="lagOptions"
@@ -23,6 +26,7 @@
         <v-select
           v-model="location"
           :items="locationOptions"
+          multiple
           label="Select"
           hint="Where do you think you contracted COVID19?"
           persistent-hint
@@ -146,6 +150,7 @@
         'transmission.hotel',
         'transmission.exercise',
         'transmission.gym',
+        'transmission.smoke',
         'transmission.cautiousness',
       ]),
     },
@@ -160,8 +165,10 @@
         'airplane',
         'bar',
         'beach',
+        'coworker',
         'family',
         'grocery store',
+        'gym',
         'hotel',
         'restaurant',
         'retail store',

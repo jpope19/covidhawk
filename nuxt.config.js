@@ -87,6 +87,12 @@ export default {
   },
   buildDir: 'nuxt-dist',
   serverMiddleware: [
-    '~/api/index.js'
-  ]
+    '~/api/index.js',
+  ],
+  render: {
+    static: {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      ummutable: true,
+    },
+  },
 }

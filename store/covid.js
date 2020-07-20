@@ -43,7 +43,7 @@ export const state = () => ({
     // When do you think you contracted COVID19? 1-2 days ago, 3-7 days ago, 1+ week ago, Unknown
     lag: '',
     // Where do you think you contracted COVID19? 
-    location: '',
+    location: [],
     locationOther: '',
     // How often did you wear a mask around people indoors? Very often, often, rarely, never
     // How often did you wear a mask around people outdoors? Very often, often, rarely, never
@@ -68,6 +68,8 @@ export const state = () => ({
     exercise: '',
     // Have you been in a gym in the past two weeks? boolean
     gym: false,
+    // Do you smoke?
+    smoke: false,
     // Generally speaking, how cautious are you? Very cautious, cautious, not cautious      
     cautiousness: '',
   },

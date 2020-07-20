@@ -76,6 +76,8 @@ _doc:
           type: keyword
         gym:
           type: boolean
+        smoke:
+          type: boolean
         cautiousness:
           type: keyword
     personal:
