@@ -20,6 +20,9 @@
                 This application gives us the chance to document and give a voice to all 3.78 million and counting victims of COVID-19 in the United States.
               </p>
               <p>
+                The data is tied to <a href="https://www.elastic.co/" target="blank">Elasticsearch</a>, so <a href="https://www.elastic.co/maps">geospatial</a> and time series data are immediately available to statisticians, epidemiologists, and government officials around the world through <a href="https://elastic.co/kibana" target="blank">Kibana</a> to help us act and act fast.
+              </p>
+              <p>
                 Let's all unite and defeat COVID-19.
               </p>
               <p>
