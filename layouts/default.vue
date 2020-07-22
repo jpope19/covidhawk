@@ -39,15 +39,20 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: '/'
+          to: '/',
         },
         {
           icon: 'mdi-virus-outline',
           title: 'COVID',
-          to: '/covid'
-        }
+          to: '/covid',
+        },
+        {
+          icon: 'mdi-information',
+          title: 'About Us',
+          to: '/about-us',
+        },
       ],
-      title: 'COVID Hawk'
+      title: 'COVID Hawk',
     }
   }
 }

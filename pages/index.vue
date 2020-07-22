@@ -9,38 +9,26 @@
           <v-divider></v-divider>
           <v-layout justify-center align-center>
             <v-flex xs12 md8 text-center mt-4>
-              <h3 class="pb-2">About Us</h3>
+              <h3 class="pb-2">Our Mission</h3>
               <p>
-                Our goal is to give the public a chance to help end the COVID pandemic.
-                Currently, our testing situation has improved, but it is still not where it needs to be.
-                Even if everyone who wanted a test, could get a test, we are still looking at a valuable 2 to 5 week time period from when first symptoms appear to when a person gets counted as a COVID positive.
+                To provide <b>real time</b> infection data to researchers, leaders, and the public using the experiences from folks just like you.
               </p>
+              <h3 class="pb-2">Our Plan</h3>
               <p>
-                By working together, we can use historical data, as well as new symptomatic cases, to get rid of the lag. If we all anonymously input what we individually know about the virus, we can really make a difference.
-                This application gives us the chance to document and give a voice to all 3.78 million and counting victims of COVID-19 in the United States.
-              </p>
-              <p>
-                The data is tied to <a href="https://www.elastic.co/" target="blank">Elasticsearch</a>, so <a href="https://www.elastic.co/maps">geospatial</a> and time series data are immediately available to statisticians, epidemiologists, and government officials around the world through <a href="https://elastic.co/kibana" target="blank">Kibana</a> to help us act and act fast.
+                The following, completely anonymous survery is tied to a dashboard that provides new insight <b>immediately</b>. Other tracking projects can have up to a 5 week delay from when first symptoms appear!
               </p>
               <p>
                 Let's all unite and defeat COVID-19.
-              </p>
-              <p>
-                These questions might not be the answer but the more knowledge we have, the better equipped we are. Please take next 10 minutes to give your experience a voice.
               </p>
             </v-flex>
           </v-layout>
           <v-divider></v-divider>
           <v-layout justify-center align-center v-if="!submitted">
-            <v-flex xs12 md8 text-center mt-4 v-if="!locationFailed">
-              <p>The only personal information we collect is your general location. You can allow us to detect your location, or you can manually enter your zip code.</p>
-              <p><a href="https://support.google.com/maps/answer/2839911" target="_blank" rel="noopener noreferrer">Here is some more information</a> on troubleshooting if you are having trouble with location.</p>
-              <p class="mb-0">Why do we ask for your location this way? The service provided by Google Chrome and Mozilla Firefox doesn't claim to be accurate. We don't even want it to be accurate. We want to track COVID, not humans.</p>
-            </v-flex>
             <v-flex xs12 md8 text-center mt-4 v-if="locationFailed">
               <p>Oops! It looks like we had trouble detecting your location</p>
               <p>Check out <a href="https://support.google.com/chrome/answer/142065" target="_blank" rel="noopener noreferrer">documentation</a> on how to share your location with Google Chrome.</p>
               <p>If you are using a browser other than Google Chrome or Mozilla Firefox, please consider upgrading to one of these. Otherwise, manually entering your zip code below will work as well!</p>
+              <v-divider class="mb-4"></v-divider>
               <v-autocomplete
                 v-model="zipcode"
                 :items="items"
@@ -51,6 +39,7 @@
                 placeholder="ex. 33609"
                 prepend-icon="mdi-crosshairs"
                 allow-overflow
+                mt-4
               ></v-autocomplete>
             </v-flex>
           </v-layout>
@@ -65,22 +54,28 @@
               <v-flex xs12 text-center mb-4 v-if="locationFailed">
                 <v-btn color="primary" nuxt to="/covid" :disabled="!valid">Continue</v-btn>
               </v-flex>
-              <v-flex xs12 md8 mt-1 mb-4 pl-2 pr-2>
+              <v-flex xs12 md8 mt-1 pl-2 pr-2>
                 <p class="shout font-weight-black text--secondary">We promise to only use location data to be able to graph the migration of COVID. Your responses are 100% anonymous.*</p>
+                <p class="text-caption" v-if="!locationFailed">You can press cancel to manually enter your zip code.</p>
               </v-flex>
+              <!-- <v-flex xs12 md8 text-center mb-4 v-if="!locationFailed" class="text-caption">
+                <p>The only personal information we collect is your general location. You can allow us to detect your location, or you can manually enter your zip code.</p>
+                <p><a href="https://support.google.com/maps/answer/2839911" target="_blank" rel="noopener noreferrer">Here is some more information</a> on troubleshooting if you are having trouble with location.</p>
+                <p class="mb-0">Why do we ask for your location this way? The service provided by Google Chrome and Mozilla Firefox doesn't claim to be accurate. We don't even want it to be accurate. We want to track COVID, not humans.</p>
+              </v-flex> -->
             </v-row>
           </v-layout>
         </v-card-actions>
       </v-card>
-        <v-overlay :value="overlay">
-          <v-sheet class="px-3 pt-3 pb-3" light>
-            <v-img src="/CovidHawk_Logo_GraphicOnly_Navy-01-01.png" width="280"></v-img>
-            <v-skeleton-loader
-              width="280"
-              type="list-item-two-line"
-            ></v-skeleton-loader>
-          </v-sheet>
-        </v-overlay>
+      <v-overlay :value="overlay">
+        <v-sheet class="px-3 pt-3 pb-3" light>
+          <v-img src="/CovidHawk_Logo_GraphicOnly_Navy-01-01.png" width="280"></v-img>
+          <v-skeleton-loader
+            width="280"
+            type="list-item-two-line"
+          ></v-skeleton-loader>
+        </v-sheet>
+      </v-overlay>
     </v-flex>
   </v-layout>
 </template>
