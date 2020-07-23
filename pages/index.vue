@@ -17,6 +17,10 @@
               <p>
                 The following, completely anonymous survery is tied to a dashboard that provides new insight <b>immediately</b>. Other tracking projects can have up to a 5 week delay from when first symptoms appear!
               </p>
+              <h3 class="pb-2">How We Are Different</h3>
+              <p>
+                Here at COVID Hawk we will <b>NEVER</b> track your location. We only detect it once, at the very beginning. We also allow to manually enter your zip code. We will never store any personal information that can track your submission back to you.
+              </p>
               <p>
                 Let's all unite and defeat COVID-19.
               </p>
@@ -25,10 +29,10 @@
           <v-divider></v-divider>
           <v-layout justify-center align-center v-if="!submitted">
             <v-flex xs12 md8 text-center mt-4 v-if="locationFailed">
-              <p>Oops! It looks like we had trouble detecting your location</p>
+              <!-- <p>Oops! It looks like we had trouble detecting your location</p>
               <p>Check out <a href="https://support.google.com/chrome/answer/142065" target="_blank" rel="noopener noreferrer">documentation</a> on how to share your location with Google Chrome.</p>
               <p>If you are using a browser other than Google Chrome or Mozilla Firefox, please consider upgrading to one of these. Otherwise, manually entering your zip code below will work as well!</p>
-              <v-divider class="mb-4"></v-divider>
+              <v-divider class="mb-4"></v-divider> -->
               <v-autocomplete
                 v-model="zipcode"
                 :items="items"
@@ -48,7 +52,7 @@
           <v-layout>
             <v-row class="justify-center">
               <v-flex xs12 text-center mb-4 v-if="!locationFailed">
-                <v-btn color="grey lighten-1" @click="cancelDetection">Cancel</v-btn>
+                <v-btn color="primary" @click="cancelDetection">Enter Zip Code</v-btn>
                 <v-btn color="primary" @click="detectLocation"><v-icon left>mdi-crosshairs-gps</v-icon>Detect Location</v-btn>
               </v-flex>
               <v-flex xs12 text-center mb-4 v-if="locationFailed">
@@ -56,7 +60,6 @@
               </v-flex>
               <v-flex xs12 md8 mt-1 pl-2 pr-2>
                 <p class="shout font-weight-black text--secondary">We promise to only use location data to be able to graph the migration of COVID. Your responses are 100% anonymous.*</p>
-                <p class="text-caption" v-if="!locationFailed">You can press cancel to manually enter your zip code.</p>
               </v-flex>
               <!-- <v-flex xs12 md8 text-center mb-4 v-if="!locationFailed" class="text-caption">
                 <p>The only personal information we collect is your general location. You can allow us to detect your location, or you can manually enter your zip code.</p>
