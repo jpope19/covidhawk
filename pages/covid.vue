@@ -99,6 +99,12 @@
         this.step = parseInt(a);
       }
     },
+    watch: {
+      submitted: sub => {
+        // if submitted is now true, get rid of beforeunload listener
+        if (sub) window.onbeforeunload = () => {};
+      }
+    },
     mounted () {
       const self = this;
 
@@ -119,6 +125,6 @@
           { src: 'https://www.google.com/recaptcha/api.js?render=explicit', async: true, defer: true },
         ],
       };
-    }
+    },
   }
 </script>

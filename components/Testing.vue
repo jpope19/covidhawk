@@ -151,6 +151,7 @@
         'Urgent Care',
         'ER',
         'Hospitalized',
+        'None'
       ],
       today: new Date(),
     }),

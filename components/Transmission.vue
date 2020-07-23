@@ -103,7 +103,7 @@
           v-model="contacts"
           :items="contactsOptions"
           label="Select"
-          hint="Roughly how many people have you been in close contact with in the last week?"
+          hint="Roughly how many people were you in contact with the week prior to getting sick?"
           persistent-hint
         ></v-select>
       </v-col>
@@ -112,7 +112,7 @@
           v-model="exercise"
           :items="exerciseOptions"
           label="Select"
-          hint="How often have you been exercising indoors?"
+          hint="How often were you exercising indoors before getting sick?"
           persistent-hint
         ></v-select>
       </v-col>
@@ -188,10 +188,10 @@
         'never',
       ],
       handsOptions: [
-        '0-2 times',
-        '3-5 times',
-        '6-9 times',
-        '10+ times',
+        'very often',
+        'often',
+        'rarely',
+        'never',
       ],
       housingOptions: [
         'single-family',
@@ -209,12 +209,14 @@
         'mostly outdoors',
         'other',
       ],
-      contactsOptions: [ '0-5', '6-10', '11-20', '21+' ],
+      contactsOptions: [
+        
+        '0-5', '6-10', '11-20', '21+' ],
       exerciseOptions: [
-        '0-1 time per week',
-        '2-3 times per week',
-        '4-5 times per week',
-        '6-7 times per week'
+        'very often',
+        'often',
+        'rarely',
+        'never',
       ],
       cautiousnessOptions: [
         'very cautious',
