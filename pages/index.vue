@@ -19,7 +19,10 @@
               </p>
               <h3 class="pb-2">How We Are Different</h3>
               <p>
-                Here at COVID Hawk we will <b>NEVER</b> track your location. We only detect it once, at the very beginning. We also allow to manually enter your zip code. We will never store any personal information that can track your submission back to you.
+                Here at COVID Hawk we will <b>NEVER</b> track your location. We only need it once to track COVID, not you. You can do this by letting the browser give us your location, or by manually entering your zip code.
+              </p>
+              <p>
+                We will never store any personal information that can track your submission back to you.
               </p>
               <p>
                 Let's all unite and defeat COVID-19.
