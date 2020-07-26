@@ -56,6 +56,7 @@ function getIndexSettings() {
  * Post a covid case to elastic
  *
  * @param {Object} covid
+ * @returns {Object}
  */
 async function postCovid(body) {
   return client
@@ -63,7 +64,29 @@ async function postCovid(body) {
       index: COVID_INDEX,
       body,
     })
-    .then(() => body);
+    .then(res => {
+      return {
+        id: res.body._id,
+        body,
+      };
+    });
+}
+
+/**
+ * Makes an update to an existing covid doc
+ *
+ * @param {string} id
+ * @param {Object} body
+ * @returns {Object}
+ */
+async function putCovid(id, body) {
+  return client
+    .index({
+      index: COVID_INDEX,
+      id,
+      body,
+    })
+    .then(() => ({ id, body }));
 }
 
 /**
@@ -111,3 +134,4 @@ async function init() {
 
 module.exports.init = init;
 module.exports.postCovid = postCovid;
+module.exports.putCovid = putCovid;

@@ -1,11 +1,15 @@
 _doc:
   properties:
+    basic:
+      type: boolean
     testing:
       properties:
         antibody:
           properties:
             tested:
               type: boolean
+            dateTaken:
+              type: date
             date:
               type: date
             result:
@@ -14,6 +18,8 @@ _doc:
           properties:
             tested:
               type: boolean
+            dateTaken:
+              type: date
             date:
               type: date
             result:
@@ -46,6 +52,8 @@ _doc:
           type: boolean
     transmission:
       properties:
+        date:
+          type: date
         lag:
           type: keyword
         location:

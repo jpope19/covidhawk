@@ -3,13 +3,13 @@
     <v-form v-if="!submitted">
       <v-stepper v-model="step" @change="gotoStep">
         <v-stepper-header>
-          <v-stepper-step key="testing" :complete="testingDone" editable step="1">Testing</v-stepper-step>
+          <v-stepper-step key="testing" editable step="1">Testing</v-stepper-step>
           <v-divider />
-          <v-stepper-step key="symptoms" :complete="symptomsDone" editable step="2">Symptoms</v-stepper-step>
+          <v-stepper-step key="symptoms" editable step="2">Symptoms</v-stepper-step>
           <v-divider />
-          <v-stepper-step key="transmission" :complete="transmissionDone" editable step="3">Transmission</v-stepper-step>
+          <v-stepper-step key="transmission" editable step="3">Transmission</v-stepper-step>
           <v-divider />
-          <v-stepper-step key="personal" :complete="personalDone" editable step="4">Optional</v-stepper-step>
+          <v-stepper-step key="personal" editable step="4">Optional</v-stepper-step>
         </v-stepper-header>
         <v-stepper-items>
           <v-stepper-content step="1">
@@ -70,30 +70,12 @@
 
   export default {
     computed: {
-      progress() {
-        return this.step/this.totalSteps;
-      },
-      testingDone() {
-        return false;
-      },
-      symptomsDone() {
-        return false;
-      },
-      transmissionDone() {
-        return false;
-      },
-      personalDone() {
-        return false;
-      },
       ...mapFields('navigation', [
         'step',
         'totalSteps',
         'submitted',
       ]),
     },
-    data: () => ({
-      RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
-    }),
     methods: {
       gotoStep(a) {
         this.step = parseInt(a);
@@ -109,8 +91,8 @@
       const self = this;
 
       // if we don't have location, send back to the home page
-      if (!(this.$store.state.covid.location.zipcode || (this.$store.state.covid.location.coords.lat && this.$store.state.covid.location.coords.lon))) {
-        this.$nuxt.$router.push('/');
+      if (!(this.$store.state.covid.location.zipcode && this.$store.state.navigation.id)) {
+        document.location = '/';
       }
 
       window.onbeforeunload = function(){
@@ -118,13 +100,6 @@
       }
 
       this.totalSteps = 4;
-    },
-    head() {
-      return {
-        script: [
-          { src: 'https://www.google.com/recaptcha/api.js?render=explicit', async: true, defer: true },
-        ],
-      };
-    },
+    }
   }
 </script>

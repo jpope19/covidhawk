@@ -3,9 +3,13 @@
     <v-flex xs12 sm8 md6>
       <v-card>
         <v-card-title class="headline">
-          <v-img src="/CovidHawk_Logo_Navy_Horizontal-01.png" width="280"></v-img>
+          <div class="d-flex align-center justify-center" style="width: 100%">
+            <div style="max-width: 280px">
+              <v-img src="/CovidHawk_Logo_Navy_Horizontal-01.png"></v-img>
+            </div>
+          </div>
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="pb-0">
           <v-divider></v-divider>
           <v-layout justify-center align-center>
             <v-flex xs12 md8 text-center mt-4>
@@ -13,29 +17,14 @@
               <p>
                 To provide <b>real time</b> infection data to researchers, leaders, and the public using the experiences from folks just like you.
               </p>
-              <h3 class="pb-2">Our Plan</h3>
-              <p>
-                The following, completely anonymous survery is tied to a dashboard that provides new insight <b>immediately</b>. Other tracking projects can have up to a 5 week delay from when first symptoms appear!
-              </p>
-              <h3 class="pb-2">How We Are Different</h3>
-              <p>
-                Here at COVID Hawk we will <b>NEVER</b> track your location. We only need it once to track COVID, not you. You can do this by letting the browser give us your location, or by manually entering your zip code.
-              </p>
-              <p>
-                We will never store any personal information that can track your submission back to you.
-              </p>
-              <p>
-                Let's all unite and defeat COVID-19.
-              </p>
             </v-flex>
           </v-layout>
           <v-divider></v-divider>
-          <v-layout justify-center align-center v-if="!submitted">
-            <v-flex xs12 md8 text-center mt-4 v-if="locationFailed">
-              <!-- <p>Oops! It looks like we had trouble detecting your location</p>
-              <p>Check out <a href="https://support.google.com/chrome/answer/142065" target="_blank" rel="noopener noreferrer">documentation</a> on how to share your location with Google Chrome.</p>
-              <p>If you are using a browser other than Google Chrome or Mozilla Firefox, please consider upgrading to one of these. Otherwise, manually entering your zip code below will work as well!</p>
-              <v-divider class="mb-4"></v-divider> -->
+          <div class="d-flex flex-column mt-4 justify-center align-center">
+            <v-flex xs12 md8>
+              <h3>Answering these three questions will help us defeat COVID19</h3>
+            </v-flex>
+            <v-flex xs12 md8 text-center mt-4>
               <v-autocomplete
                 v-model="zipcode"
                 :items="items"
@@ -49,37 +38,87 @@
                 mt-4
               ></v-autocomplete>
             </v-flex>
-          </v-layout>
+            <v-flex xs12 md8>
+              <v-menu ref="startMenu"
+                v-model="startDateMenu"
+                :close-on-content-click="false"
+                :return-value.sync="start"
+                :disabled="!zipcode"
+                transition="scale-transition"
+                offset-y width="290px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field v-model="start"
+                    placeholder="ex. YYYY-MM-DD"
+                    label="First date of COVID19 symptoms"
+                    :disabled="!zipcode"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on">
+                  </v-text-field>
+                </template>
+                <v-date-picker v-model="start"
+                  :max="now"
+                  no-title
+                  scrollable
+                  @click:date="$refs.startMenu.save(start)"></v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex xs12 md8>
+              <v-menu ref="transmissionMenu"
+                v-model="transmissionDateMenu"
+                :close-on-content-click="false"
+                :return-value.sync="date"
+                transition="scale-transition"
+                :disabled="!start"
+                offset-y
+                width="290px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field v-model="date"
+                    placeholder="ex. YYYY-MM-DD"
+                    label="When do you think you got COVID19?"
+                    :disabled="!start"
+                    prepend-icon="mdi-calendar" 
+                    readonly
+                    v-bind="attrs"
+                    v-on="on">
+                  </v-text-field>
+                </template>
+                <v-date-picker v-model="date"
+                  :max="start"
+                  no-title
+                  scrollable
+                  @click:date="$refs.transmissionMenu.save(date)"></v-date-picker>
+              </v-menu>
+            </v-flex>
+          </div>
         </v-card-text>
-        <v-card-actions class="text-center" v-if="!submitted">
-          <v-layout>
-            <v-row class="justify-center">
-              <v-flex xs12 text-center mb-4 v-if="!locationFailed">
-                <v-btn color="primary" @click="cancelDetection">Enter Zip Code</v-btn>
-                <v-btn color="primary" @click="detectLocation"><v-icon left>mdi-crosshairs-gps</v-icon>Detect Location</v-btn>
-              </v-flex>
-              <v-flex xs12 text-center mb-4 v-if="locationFailed">
-                <v-btn color="primary" nuxt to="/covid" :disabled="!valid">Continue</v-btn>
-              </v-flex>
-              <v-flex xs12 md8 mt-1 pl-2 pr-2>
-                <p class="shout font-weight-black text--secondary">We promise to only use location data to be able to graph the migration of COVID. Your responses are 100% anonymous.*</p>
-              </v-flex>
-              <!-- <v-flex xs12 md8 text-center mb-4 v-if="!locationFailed" class="text-caption">
-                <p>The only personal information we collect is your general location. You can allow us to detect your location, or you can manually enter your zip code.</p>
-                <p><a href="https://support.google.com/maps/answer/2839911" target="_blank" rel="noopener noreferrer">Here is some more information</a> on troubleshooting if you are having trouble with location.</p>
-                <p class="mb-0">Why do we ask for your location this way? The service provided by Google Chrome and Mozilla Firefox doesn't claim to be accurate. We don't even want it to be accurate. We want to track COVID, not humans.</p>
-              </v-flex> -->
-            </v-row>
+        <v-card-actions class="text-center pt-0">
+          <v-layout column justify-center align-center>
+            <recaptcha />
+            <v-flex xs12 text-center mb-4>
+              <v-btn color="primary" @click="submit" :disabled="!valid">Submit</v-btn>
+            </v-flex>
           </v-layout>
         </v-card-actions>
       </v-card>
       <v-overlay :value="overlay">
-        <v-sheet class="px-3 pt-3 pb-3" light>
-          <v-img src="/CovidHawk_Logo_GraphicOnly_Navy-01-01.png" width="280"></v-img>
-          <v-skeleton-loader
-            width="280"
-            type="list-item-two-line"
-          ></v-skeleton-loader>
+        <v-sheet class="px-3 pt-3 pb-3" style="width: 280px; text-align: center;" light>
+          <v-img src="/CovidHawk_Logo_GraphicOnly_Navy-01-01.png" width="80" style="margin: 0 auto;" class="mb-2"></v-img>
+          <div v-if="loading">
+            <v-skeleton-loader
+              width="280"
+              type="list-item-two-line"
+            ></v-skeleton-loader>
+          </div>
+          <div v-if="!loading">
+            <h1>Thank You!</h1>
+            <p>Your input will help eradicate COVID19. You can provide even more insight by continuing and answering a few more anonymous questions.</p>
+            <p>The data is used so that experts, leaders, and the media can provide more accurate analysis.</p>
+            <div>
+              <v-btn color="primary" nuxt to="/covid" :disabled="!id">Continue</v-btn>
+            </div>
+          </div>
         </v-sheet>
       </v-overlay>
     </v-flex>
@@ -87,8 +126,8 @@
 </template>
 
 <style scoped>
-  .shout {
-    font-size: 0.875rem;
+  .flex.xs12 {
+    min-width: 260px;
   }
 </style>
 
@@ -98,64 +137,65 @@ import * as usZips from 'us-zips';
 
 export default {
   data: () => ({
-    locationFailed: false,
     items: Object.keys(usZips),
     rules: [
       (val) => !!val && !!val.match(/^\d{5}$/),
     ],
+    now: new Date().toISOString().slice(0,10),
     searchZip: null,
+    startDateMenu: false,
+    transmissionDateMenu: false,
+    today: new Date(),
     overlay: false,
+    loading: false,
+    RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
   }),
   computed: {
     ...mapFields('covid', [
       'location.zipcode',
+      'testing.start',
+      'transmission.date',
       'location.coords.lat',
       'location.coords.lon',
     ]),
     ...mapFields('navigation', [
-      'submitted',
+      'recaptcha',
+      'id',
     ]),
     valid() {
-      return this.zipcode || (this.lat && this.lon);
+      return this.zipcode && this.start && this.date;
     }
   },
   methods: {
-    detectLocation() {
+    submit() {
       const self = this;
-
-      this.overlay = true;
-
-      navigator.geolocation.getCurrentPosition(pos => {
-        console.log(pos);
-        if (pos && pos.coords && pos.coords.latitude && pos.coords.longitude) {
-          self.lat = pos.coords.latitude;
-          self.lon = pos.coords.longitude;
-
-          // forward to survey
-          this.$nuxt.$router.push('/covid');
-        } else {
-          self.locationFailed = true;
-        }
-      }, err => {
-        console.log('Error occurred. Error code: ' + err.code);
-        self.locationFailed = true;
-        self.overlay = false;
-
-        // error.code can be:
-        //   0: unknown error
-        //   1: permission denied
-        //   2: position unavailable (error response from location provider)
-        //   3: timed out
-      });
-    },
-    cancelDetection() {
-      this.locationFailed = true;
-    },
+      if (this.recaptcha) {
+        self.overlay = true;
+        fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+            covid: this.$store.state.covid,
+            recaptcha: this.recaptcha,
+          })
+        })
+        .then(res => res.json())
+        .then(res => {
+          self.id = res.id;
+          self.lat = res.body.location.coords.lat;
+          self.lon = res.body.location.coords.lon;
+        });
+      }
+    }
   },
   watch: {
     searchZip(val) {
       this.items = !!val ? Object.keys(usZips).filter(zip => zip.startsWith(val)) : [];
     }
-  }
+  },
+  head() {
+    return {
+      script: [
+        { src: 'https://www.google.com/recaptcha/api.js?render=explicit', async: true, defer: true },
+      ],
+    };
+  },
 }
 </script>

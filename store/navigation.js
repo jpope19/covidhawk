@@ -4,6 +4,7 @@ export const state = () => ({
   step: 1,
   totalSteps: 1,
   recaptcha: '',
+  id: '',
   submitted: false,
 });
 

@@ -15,15 +15,6 @@
       </v-col>
       <v-col cols="12" md="4">
         <v-select
-          v-model="lag"
-          :items="lagOptions"
-          label="Select"
-          hint="How many days before symptoms do you think you contracted COVID19?"
-          persistent-hint
-        ></v-select>
-      </v-col>
-      <v-col cols="12" md="4">
-        <v-select
           v-model="location"
           :items="locationOptions"
           multiple
@@ -169,9 +160,11 @@
         'family',
         'grocery store',
         'gym',
+        'home',
         'hotel',
         'restaurant',
         'retail store',
+        'work',
         'other',
       ],
       maskOptions: [
