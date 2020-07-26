@@ -1,6 +1,7 @@
 import { getField, updateField } from 'vuex-map-fields'
 
 export const state = () => ({
+  basic: true,
   testing: {
     // Did you receive an antibody test?
     antibody: {
@@ -40,6 +41,8 @@ export const state = () => ({
     appetite: false,
   },
   transmission: {
+    // Do you think you know the exact date of when you got COVID19?
+    date: null,
     // When do you think you contracted COVID19? 1-2 days ago, 3-7 days ago, 1+ week ago, Unknown
     lag: '',
     // Where do you think you contracted COVID19? 
