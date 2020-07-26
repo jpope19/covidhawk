@@ -92,7 +92,7 @@
 
       // if we don't have location, send back to the home page
       if (!(this.$store.state.covid.location.zipcode && this.$store.state.navigation.id)) {
-        this.$nuxt.$router.push('/');
+        document.location = '/';
       }
 
       window.onbeforeunload = function(){

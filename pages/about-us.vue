@@ -30,15 +30,6 @@
               </p>
             </v-flex>
           </v-layout>
-          <v-divider></v-divider>
-          <v-layout justify-center align-center>
-            <v-flex xs12 md8 text-center mt-4>
-              <h3 class="pb-2">Why do we ask for your location?</h3>
-              <p>The only personal information we collect is your general location. This allows us to track COVID, not humans. By tracking the virus, we might be able to predict the next outbreak.</p>
-              <p><a href="https://support.google.com/maps/answer/2839911" target="_blank" rel="noopener noreferrer">Here is some more information</a> on troubleshooting if you are having trouble with location.</p>
-              <p class="mb-0">Why do we ask for your location this way? The service provided by Google Chrome and Mozilla Firefox doesn't claim to be accurate. We don't even want it to be accurate. We want to track COVID, not humans.</p>
-            </v-flex>
-          </v-layout>
         </v-card-text>
       </v-card>
     </v-flex>
