@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <recaptcha />
     <div class="text-xs-center">
       <v-btn :disabled="step === 1" color="grey lighten-1" @click="previous()">
         Previous
@@ -8,7 +7,7 @@
       <v-btn color="primary" @click="next()" v-if="step !== totalSteps">
         Next
       </v-btn>
-      <v-btn :disabled="!recaptcha" color="primary" @click="submit()" v-if="step === totalSteps">
+      <v-btn :disabled="!id" color="primary" @click="submit()" v-if="step === totalSteps">
         Submit
       </v-btn>
     </div>
@@ -33,8 +32,11 @@
       ...mapFields('navigation', [
         'step',
         'totalSteps',
-        'recaptcha',
+        'id',
         'submitted',
+      ]),
+      ...mapFields('covid', [
+        'basic',
       ]),
     },
     methods: {
@@ -48,17 +50,12 @@
       },
       submit() {
         this.submitted = true;
-        if (this.recaptcha) {
-          fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-              covid: this.$store.state.covid,
-              recaptcha: this.recaptcha,
-            })
+        this.basic = false;
+
+        fetch(`/api/covid/${this.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+            covid: this.$store.state.covid
           })
-          .then(res => res.json())
-          .then(res => {
-            console.log('res', res);
-          });
-        }
+        });
       }
     }
   }

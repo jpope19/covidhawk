@@ -8,6 +8,8 @@ _doc:
           properties:
             tested:
               type: boolean
+            dateTaken:
+              type: date
             date:
               type: date
             result:
@@ -16,6 +18,8 @@ _doc:
           properties:
             tested:
               type: boolean
+            dateTaken:
+              type: date
             date:
               type: date
             result:

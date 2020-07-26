@@ -19,15 +19,28 @@ app.post('/covid',
     if (geolocation.makeSureBodyHasLocation(req.body.covid)) next();
     else res.status(500).send('Trouble validating location');
   },
-  (req, res, next) => {
+  (req, res) => {
     elastic.postCovid(req.body.covid).then(body => {
       res.json(body);
     }).catch(e => {
       console.log(e);
-      res.status(500).send('Trouble posting to Elasticsearch');
+      res.status(500).send('Trouble POSTing to Elasticsearch');
     });
   }
 );
+
+app.put('/covid/:id', (req, res) => {
+  if (req.body && req.params.id && req.body.covid) {
+    elastic.putCovid(req.params.id, req.body.covid).then(body => {
+      res.json(body);
+    }).catch(e => {
+      console.log(e);
+      res.status(500).send('Trouble PUTing to Elasticsearch');
+    });
+  } else {
+    res.status(500).send('id and covid both required');
+  }
+});
 
 module.exports = {
    path: '/api',

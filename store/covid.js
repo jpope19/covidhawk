@@ -6,12 +6,14 @@ export const state = () => ({
     // Did you receive an antibody test?
     antibody: {
       tested: false,
+      dateTaken: null, 
       date: null,
       result: '',
     },
     // Did you receive a viral test?
     viral: {
       tested: false,
+      dateTaken: null,
       date: null,
       result: '',
     },

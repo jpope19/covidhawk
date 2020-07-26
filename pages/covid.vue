@@ -91,7 +91,7 @@
       const self = this;
 
       // if we don't have location, send back to the home page
-      if (!(this.$store.state.covid.location.zipcode || (this.$store.state.covid.location.coords.lat && this.$store.state.covid.location.coords.lon))) {
+      if (!(this.$store.state.covid.location.zipcode && this.$store.state.navigation.id)) {
         this.$nuxt.$router.push('/');
       }
 

@@ -58,7 +58,7 @@
                   </v-text-field>
                 </template>
                 <v-date-picker v-model="start"
-                  :allowed-dates="allowedDates"
+                  :max="now"
                   no-title
                   scrollable
                   @click:date="$refs.startMenu.save(start)"></v-date-picker>
@@ -141,6 +141,7 @@ export default {
     rules: [
       (val) => !!val && !!val.match(/^\d{5}$/),
     ],
+    now: new Date().toISOString().slice(0,10),
     searchZip: null,
     startDateMenu: false,
     transmissionDateMenu: false,
@@ -154,10 +155,11 @@ export default {
       'location.zipcode',
       'testing.start',
       'transmission.date',
+      'location.coords.lat',
+      'location.coords.lon',
     ]),
     ...mapFields('navigation', [
       'recaptcha',
-      'submitted',
       'id',
     ]),
     valid() {
@@ -165,16 +167,10 @@ export default {
     }
   },
   methods: {
-    // dont show days after now
-    allowedDates(date) {
-      const d = new Date(date),
-        ts = d.getTime(),
-        now = this.today.getTime() - this.today.getTimezoneOffset()*60*1000;
-
-      return ts <= now;
-    },
     submit() {
+      const self = this;
       if (this.recaptcha) {
+        self.overlay = true;
         fetch('/api/covid', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
             covid: this.$store.state.covid,
             recaptcha: this.recaptcha,
@@ -182,7 +178,9 @@ export default {
         })
         .then(res => res.json())
         .then(res => {
-          console.log('res', res);
+          self.id = res.id;
+          self.lat = res.body.location.coords.lat;
+          self.lon = res.body.location.coords.lon;
         });
       }
     }
